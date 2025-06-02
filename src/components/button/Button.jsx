@@ -1,9 +1,9 @@
 import './Button.css';
 
-function Button({ buttonName, onClick }) {
+function Button({ type, buttonName, onClick }) {
     return (
         <button
-            type="button"
+            type={type}
             onClick={onClick}
         >{buttonName}</button>
     )
