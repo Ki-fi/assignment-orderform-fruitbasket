@@ -1,13 +1,14 @@
 import './Input.css';
 
-function Input({ type, labelName, placeholderText, defaultValue, name }) {
+function Input({ labelName, placeholderText, defaultValue, name, value, onChange }) {
     return(
         <label>{labelName}
         <input
-            type={type}
             placeholder={placeholderText}
             defaultValue={defaultValue}
             name={name}
+            value={value}
+            onChange={onChange}
         />
         </label>
     )

@@ -11,8 +11,38 @@ function App() {
     const [nrOfApples, setNrOfApples] = useState(0);
     const [nrOfKiwis, setNrOfKiwis] = useState(0);
 
+    const [formState, setFormState] = useState({
+        firstName: '',
+        lastName: '',
+        age: '0',
+        zipcode: '',
+        frequencySelect: "weekly",
+        delivery: "overdag",
+        comment: '',
+        conditions: false,
+    })
+
+    function handleChange(e) {
+        const changedField = e.target.name;
+        const newValue = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+
+        setFormState({
+            ...formState,
+            [changedField]: newValue,
+        })
+    }
+
     function handleSubmit(event) {
-        console.log("test");
+        console.log(`
+            voornaam: ${formState.firstName}, 
+            achternaam: ${formState.lastName}, 
+            leeftijd: ${formState.age}, 
+            postcode: ${formState.zipcode}, 
+            bestelling: ,
+            bezorgfrequentie: ${formState.frequencySelect}, 
+            bezorgmoment: ${formState.delivery}, 
+            opmerking: ${formState.comment}, 
+            is akkoord met de voorwaarden: ${formState.conditions}`);
         event.preventDefault();
     }
 
@@ -47,40 +77,88 @@ function App() {
         <form onSubmit={handleSubmit}>
             <h1>Bestelformulier</h1>
             <Input
-                type={"text"}
                 labelName={"Voornaam"}
+                name={"firstName"}
+                value={formState.firstName}
+                onChange={handleChange}
             />
             <Input
-                type={"text"}
                 labelName={"Achternaam"}
+                name={"lastName"}
+                value={formState.lastName}
+                onChange={handleChange}
             />
             <Input
-                type={"text"}
                 labelName={"Leeftijd"}
+                name={"age"}
                 defaultValue={0}
+                value={formState.age}
+                onChange={handleChange}
             />
             <Input
-                type={"text"}
                 labelName={"Postcode"}
+                name={"zipcode"}
+                value={formState.zipcode}
+                onChange={handleChange}
             />
             <label htmlFor="frequencySelect">Bezorgfrequentie</label>
-            <select name="frequencySelect" id="">
-                <option value="weekly">Iedere week</option>
-                <option value="biweekly">Om de week</option>
-                <option value="monthly">Iedere maand</option>
+            <select name="frequencySelect" onChange={handleChange}>
+                <option
+                    value="weekly"
+                >Iedere week
+                </option>
+                <option
+                    value="biweekly"
+                >Om de week
+                </option>
+                <option
+                    value="monthly"
+                >Iedere maand
+                </option>
             </select>
             <div className="radioGroup">
-                <label><input type="radio" name="delivery" checked="true"/>Overdag</label>
-                <label><input type="radio" name="delivery"/>s' Avonds</label>
+                <label>
+                    <input
+                        type="radio"
+                        name="delivery"
+                        value="overdag"
+                        checked={formState.delivery === "overdag"}
+                        onChange={handleChange}
+                    />Overdag
+                </label>
+                <label>
+                    <input
+                        type="radio"
+                        name="delivery"
+                        value="'s avonds"
+                        checked={formState.delivery === "'s avonds"}
+                        onChange={handleChange}
+                    />s' Avonds
+                </label>
             </div>
-            <label>Opmerking<textarea name="opmerking" cols="20" rows="7"></textarea></label>
+                <label>Opmerking
+                    <textarea
+                        name="comment"
+                        cols="20" rows="7"
+                        value={formState.comment}
+                        onChange={handleChange}
+                    ></textarea>
+                </label>
             <div className="checkbox">
-            <label><input type="checkbox" name="conditions"/>Ik ga akkoord met de voorwaarden</label>
+                <label>
+                    <input
+                        type="checkbox"
+                        name="conditions"
+                        value={formState.conditions}
+                        onChange={handleChange}
+                    />Ik ga akkoord met de voorwaarden
+                </label>
             </div>
             <Button
                 type="submit"
-                buttonName={"Verzend"}/>
-            {/*Ik ben vergeten hoe je ervoor kan zorgen dat je button niet over de hele breedte schaalt.*/}
+                buttonName={"Verzend"}
+            />
+            {/*Oeps, ik ben vergeten hoe je ervoor kan zorgen dat je button niet over de hele breedte schaalt.*/}
         </form>
     </>
   )
