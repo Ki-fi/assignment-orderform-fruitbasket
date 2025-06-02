@@ -6,12 +6,12 @@ import {useState} from "react";
 import Input from "./components/input/Input.jsx";
 
 function App() {
-    const [nrOfStrawberries, setNrOfStrawberries] = useState(0);
-    const [nrOfBananas, setNrOfBananas] = useState(0);
-    const [nrOfApples, setNrOfApples] = useState(0);
-    const [nrOfKiwis, setNrOfKiwis] = useState(0);
 
     const [formState, setFormState] = useState({
+        nrOfStrawberries: 0,
+        nrOfBananas: 0,
+        nrOfApples: 0,
+        nrOfKiwis: 0,
         firstName: '',
         lastName: '',
         age: '0',
@@ -38,7 +38,11 @@ function App() {
             achternaam: ${formState.lastName}, 
             leeftijd: ${formState.age}, 
             postcode: ${formState.zipcode}, 
-            bestelling: ,
+            bestelling: 
+            ${formState.nrOfStrawberries} aardbeien,
+            ${formState.nrOfBananas} bananen,
+            ${formState.nrOfApples} appels,
+            ${formState.nrOfKiwis} kiwis,
             bezorgfrequentie: ${formState.frequencySelect}, 
             bezorgmoment: ${formState.delivery}, 
             opmerking: ${formState.comment}, 
@@ -51,28 +55,30 @@ function App() {
         <h1>Fruitmand bezorgservice</h1>
         <Card
             fruitName={"🍓 Aardbeien"}
-            amount={nrOfStrawberries}
-            setAmount={setNrOfStrawberries}/>
+            amount={formState.nrOfStrawberries}
+            setAmount={(newAmount) => setFormState({...formState, nrOfStrawberries: newAmount})}/>
         <Card
             fruitName={"🍌 Bananen"}
-            amount={nrOfBananas}
-            setAmount={setNrOfBananas}/>
+            amount={formState.nrOfBananas}
+            setAmount={(newAmount) => setFormState({...formState, nrOfBananas: newAmount})}/>
         <Card
             fruitName={"🍎 Appels"}
-            amount={nrOfApples}
-            setAmount={setNrOfApples}/>
+            amount={formState.nrOfApples}
+            setAmount={(newAmount) => setFormState({...formState, nrOfApples: newAmount})}/>
         <Card
             fruitName={"🥝 Kiwi's"}
-            amount={nrOfKiwis}
-            setAmount={setNrOfKiwis}/>
+            amount={formState.nrOfKiwis}
+            setAmount={(newAmount) => setFormState({...formState, nrOfKiwis: newAmount})}/>
         <Button
             type="button"
             buttonName={"Reset"}
-            onClick={() => {
-                setNrOfApples(0);
-                setNrOfBananas(0);
-                setNrOfKiwis(0);
-                setNrOfStrawberries(0)}}
+            onClick={() => setFormState({
+                ...formState,
+                nrOfStrawberries: '0',
+                nrOfBananas: '0',
+                nrOfApples: '0',
+                nrOfKiwis: '0',
+            })}
         />
         <form onSubmit={handleSubmit}>
             <h1>Bestelformulier</h1>

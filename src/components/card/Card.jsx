@@ -10,12 +10,12 @@ function Card({ fruitName, amount, setAmount }) {
             <Button
                 type="button"
                 buttonName={"-"}
-                onClick={() => {(amount === 0) ? setAmount(0) : setAmount(amount - 1)}}/>
+                onClick={() => {(amount === 0) ? setAmount(0) : setAmount(Number(amount) - 1)}}/>
             <p>{amount}</p>
             <Button
                 type="button"
                 buttonName={"+"}
-                onClick={() => {setAmount(amount + 1)}}/>
+                onClick={() => {setAmount(Number(amount) + 1)}}/>
         </article>
         </div>
     )
