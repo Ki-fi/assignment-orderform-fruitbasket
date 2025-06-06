@@ -1,7 +1,7 @@
 import Button from "../button/Button.jsx";
 import './Card.css';
 
-function Card({ fruitName, amount, setAmount }) {
+function Card({ fruitName, stateName, setAmount, amount }) {
 
     return (
         <div>
@@ -10,12 +10,25 @@ function Card({ fruitName, amount, setAmount }) {
             <Button
                 type="button"
                 buttonName={"-"}
-                onClick={() => {(amount === 0) ? setAmount(0) : setAmount(Number(amount) - 1)}}/>
+                onClick={() =>
+                    setAmount((currentState) => {
+                        const newAmount = Math.max(Number(amount) - 1, 0);
+                        return {
+                            ...currentState,
+                            [stateName]: newAmount,
+                        };
+                    })
+                }/>
             <p>{amount}</p>
             <Button
                 type="button"
                 buttonName={"+"}
-                onClick={() => {setAmount(Number(amount) + 1)}}/>
+                onClick={() =>
+                    setAmount((currentState) => ({
+                        ...currentState,
+                        [stateName]: Number(amount) + 1,
+                    }))
+                }/>
         </article>
         </div>
     )

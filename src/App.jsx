@@ -55,20 +55,21 @@ function App() {
         <h1>Fruitmand bezorgservice</h1>
         <Card
             fruitName={"🍓 Aardbeien"}
+            stateName="nrOfStrawberries"
             amount={formState.nrOfStrawberries}
-            setAmount={(newAmount) => setFormState({...formState, nrOfStrawberries: newAmount})}/>
+            setAmount={setFormState}/>
         <Card
             fruitName={"🍌 Bananen"}
             amount={formState.nrOfBananas}
-            setAmount={(newAmount) => setFormState({...formState, nrOfBananas: newAmount})}/>
+            setAmount={setFormState}/>
         <Card
             fruitName={"🍎 Appels"}
             amount={formState.nrOfApples}
-            setAmount={(newAmount) => setFormState({...formState, nrOfApples: newAmount})}/>
+            setAmount={setFormState}/>
         <Card
             fruitName={"🥝 Kiwi's"}
             amount={formState.nrOfKiwis}
-            setAmount={(newAmount) => setFormState({...formState, nrOfKiwis: newAmount})}/>
+            setAmount={setFormState}/>
         <Button
             type="button"
             buttonName={"Reset"}
